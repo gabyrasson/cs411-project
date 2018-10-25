@@ -6,6 +6,6 @@ Friday 2018.10.26 To-do list:
 2. make an inquiry to API(postman)
 3. parse the JSON results from API into html
 4. connect the search bar content with API responses
-Note: checking our ongoing web page, go to  http://127.0.0.1:8000/lovespread
+Note: checking our ongoing web page, go to  http://127.0.0.1:8000/mainpage
 5. customization (search bar, background pic etc.)
     
