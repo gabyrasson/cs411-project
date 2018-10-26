@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sigimera API</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+    {% for i in response_dict %}
+        <p>
+        <b>    Natural disaster Event ID: </b> <strong>{{ i.crisis_eventid}}</strong></br>
+        <b>    Alert Level: </b> <strong>{{ i.crisis_alertLevel}}</strong></br>
+        <b>    Crisis Population:  </b> <strong>{{ i.crisis_population}}</strong> </br>
+        </p>
+    {% endfor %}
+{% endblock %}
+
