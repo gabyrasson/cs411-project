@@ -18,7 +18,7 @@ from django.urls import include, path
 from mainpage import views
 
 urlpatterns = [
-    path('mainpage/', include('mainpage.urls')),
     path('admin/', admin.site.urls),
-    path('', views.index, name = 'index')
+    path('', views.index, name = 'index'),
+    path('mainpage/', include('mainpage.urls'))
 ]
