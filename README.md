@@ -5,5 +5,5 @@ To-do list:
 Note: checking our ongoing web page, go to  http://127.0.0.1:8000/mainpage
 1. set up database (mongoDB)
 2. set up cache
-3. make other API calls
-    
+3. make other API calls (ReliefWeb API, Amazon API)
+4. Styling
