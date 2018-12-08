@@ -19,6 +19,8 @@ from mainpage import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name = 'index'),
-    path('mainpage/', include('mainpage.urls'))
+    path('', views.index, name='index'),
+    path('mainpage/', include('mainpage.urls')),
+    path('showreports/', include('mainpage.urls')),
+    path('showjobs/', include('mainpage.urls'))
 ]

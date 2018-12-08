@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
-
 {% block content %}
+    {% load mainpage_extras %}
     {% for i in response_dict %}
-        <p>
-        <b>    Natural disaster Event ID: </b> <strong>{{ i.crisis_eventid}}</strong></br>
-        <b>    Alert Level: </b> <strong>{{ i.crisis_alertLevel}}</strong></br>
-        <b>    Crisis Population:  </b> <strong>{{ i.crisis_population}}</strong> </br>
-        </p>
+            <b>  <strong>{{ i.dc_title|title }}</strong></b></br>
+            {{ i.dc_description }} </br>
+            <b>   Type: </b> {{i.dc_subject.0|capfirst}} </br>
+            <b>   Country: </b> {{i.gn_parentCountry.0 |capfirst}} </br>
+            <b>   Alert Level:  </b> {{i.crisis_alertLevel}} </br>
+            <br>
+            {% url 'showreports' i.gn_parentCountry|first i.dc_subject|first as the_url1 %}
+            <a href="{{ the_url1 }}"><button>See Related Reports</button></a>
+            {% url 'showjobs' i.gn_parentCountry|first as the_url2 %}
+            <a href="{{ the_url2 }}"><button>See Related Jobs & Trainings</button></a>
+            <p></p>
     {% endfor %}
 {% endblock %}
+
 
