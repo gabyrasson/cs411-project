@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for i in response.data %}
+            <b>  <strong>{{ i.fields.title }}</strong></b></br>
+            <a href= {{ i.href }}> Report Link</a>
+            <br>
+            <p></p>
+    {% endfor %}
+{% endblock %}
