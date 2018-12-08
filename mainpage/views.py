@@ -22,10 +22,10 @@ def get_search(request):
 
 def showprotoresult(request, typetake):
     url = "http://api.sigimera.org/v1/crises"
-    querystring = {"auth_token": "JteLYfPY2XpyCb8ZkxBr","type": typetake}
+    querystring = {"auth_token": "...","type": typetake}
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "1993f52c-ade4-461a-8481-0ea4ac8176f9"
+        'Postman-Token': "..."
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
     re_response = response.json()
@@ -42,7 +42,7 @@ def showreports(request, country, distype):
     payload = ""
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "a37ddf5f-8cd7-4628-9224-8d79c10c402d"
+        'Postman-Token': "..."
     }
 
     response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
@@ -60,7 +60,7 @@ def showjobs(request, country):
     payload = ""
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "8a16eed8-8cb6-412e-9655-ec47b87da3a9"
+        'Postman-Token': "..."
     }
 
     response_jobs = requests.request("GET", url, data=payload, headers=headers, params=querystring)
@@ -77,7 +77,7 @@ def showjobs(request, country):
     payload = ""
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "18898101-4b61-4f5d-830f-c9481fc763e2"
+        'Postman-Token': "..."
     }
 
     response_training = requests.request("GET", url, data=payload, headers=headers, params=querystring)
