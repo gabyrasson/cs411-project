@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mainpage'
+    'database.apps.DatabaseConfig'
 ]
 
 MIDDLEWARE = [
@@ -107,7 +107,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+<<<<<<< Updated upstream
 TIME_ZONE = 'UTC-05:00'
+=======
+TIME_ZONE = 'EST'
+>>>>>>> Stashed changes
 
 USE_I18N = True
 

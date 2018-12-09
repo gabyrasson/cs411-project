@@ -22,10 +22,10 @@ def get_search(request):
 
 def showprotoresult(request, typetake):
     url = "http://api.sigimera.org/v1/crises"
-    querystring = {"auth_token": "...","type": typetake}
+    querystring = {"auth_token": "JteLYfPY2XpyCb8ZkxBr", "type": typetake}
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "..."
+        'Postman-Token': "1993f52c-ade4-461a-8481-0ea4ac8176f9"
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
     re_response = response.json()
