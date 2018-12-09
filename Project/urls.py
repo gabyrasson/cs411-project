@@ -22,7 +22,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('mainpage/', include('mainpage.urls')),
     path('showreports/', include('mainpage.urls')),
-    path('showjobs/', include('mainpage.urls'))
+    path('showjobs/', include('mainpage.urls')),
     path('', views.index, name = 'index'),
     path('mainpage/', include('mainpage.urls')),
     path('database/', include('database.urls'))

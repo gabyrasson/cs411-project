@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% load mainpage_extras %}
     {% for i in response_dict %}
             <b>  <strong>{{ i.dc_title|title }}</strong></b></br>
             {{ i.dc_description }} </br>
