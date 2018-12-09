@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
+from requests.auth import HTTPBasicAuth
 from .forms import SearchForm
+
+from django.http import *
 
 
 def index(request):
@@ -42,7 +45,7 @@ def showreports(request, country, distype):
     payload = ""
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "..."
+        'Postman-Token': "a37ddf5f-8cd7-4628-9224-8d79c10c402d"
     }
 
     response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
@@ -60,7 +63,7 @@ def showjobs(request, country):
     payload = ""
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "..."
+        'Postman-Token': "8a16eed8-8cb6-412e-9655-ec47b87da3a9"
     }
 
     response_jobs = requests.request("GET", url, data=payload, headers=headers, params=querystring)
@@ -77,7 +80,7 @@ def showjobs(request, country):
     payload = ""
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': "..."
+        'Postman-Token': "18898101-4b61-4f5d-830f-c9481fc763e2"
     }
 
     response_training = requests.request("GET", url, data=payload, headers=headers, params=querystring)
@@ -87,3 +90,45 @@ def showjobs(request, country):
     re_response2 = response_training.json()
 
     return render(request, 'showjobs.html', {'response1': re_response1, 'response2': re_response2})
+
+
+def handjob(request, jobid):
+    url = "https://api.reliefweb.int/v1/jobs/" + str(jobid)
+
+    payload = ""
+    headers = {
+        'cache-control': "no-cache",
+        'Postman-Token': "f8d6d228-60a1-436d-9cc4-74913ff96184"
+    }
+
+    result = requests.request("GET", url, data=payload, headers=headers)
+
+    print(result.text)
+    resultjs = result.json()
+
+    return render(request, 'handjob.html', {'result': resultjs})
+
+
+def handtraing(request, traingid):
+    url = "https://api.reliefweb.int/v1/training/" + str(traingid)
+
+    payload = ""
+    headers = {
+        'cache-control': "no-cache",
+        'Postman-Token': "ae623c7d-b5b6-4fe2-8874-847c7476ab24"
+    }
+
+    result = requests.request("GET", url, data=payload, headers=headers)
+
+    print(result.text)
+    resultjs = result.json()
+    return render(request, 'handtraing.html', {'result': resultjs})
+
+
+def add_task(request):
+    request_template = "https://api.toodledo.com/3/account/token.php"
+    payload = {'grant_type': 'authorization_code', 'code': '16fa010f10c197f9b11907eb425152967677cd20'}
+    request = request_template.format(**{'code': '16fa010f10c197f9b11907eb425152967677cd20', 'CLIENT_ID': 'cs411appuser', 'CLIENT_SECRET': 'api5c0d288c8dda3'})
+    r = requests.post(request, params=payload, auth=HTTPBasicAuth('CLIENT_ID', 'CLIENT_SECRET'))
+    re = r.json()
+    print(re.text)

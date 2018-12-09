@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for i in result.data %}
+        <b>  Title: <strong>{{ i.fields.title }}</strong></b></br>
+        <b>  Country: </b> {{ i.fields.country.0.name}} </br>
+        <b>  City: </b> {{ i.fields.city.0.name}} </br>
+        <b>  Description: </b> <p>{{ i.fields.body}}</p></br>
+        <b>  How to Register: </b> <p>{{ i.fields.how_to_register}}</p></br>
+        <b>  Start Date: </b> <p>{{ i.fields.date.start}}</p></br>
+        <b>  End Date: </b> <p>{{ i.fields.date.end}}</p></br>
+        <br>
+        <p></p>
+    {% endfor %}
+{% endblock %}

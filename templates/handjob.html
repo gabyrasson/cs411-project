@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for i in result.data %}
+        <b>  Title: <strong>{{ i.fields.title }}</strong></b></br>
+        <b>  Career Categories: </b> {{ i.fields.career_categories.0.name}} </br>
+        <b>  Country: </b> {{ i.fields.country.0.name}} </br>
+        <b>  City: </b> {{ i.fields.city.0.name}} </br>
+        <b>  Description: </b> <p>{{ i.fields.body}}</p></br>
+        <b>  How to Apply: </b> <p>{{ i.fields.how_to_apply}}</p></br>
+        <b>  Application Closing Date: </b> <p>{{ i.fields.date.closing}}</p></br>
+        <a href= "https://api.toodledo.com/3/account/authorize.php?response_type=code&client_id=cs411appuser&state=Login&scope=basic%20tasks" target="_blank"><button>View My ToodleDo Tasks</button></a>
+        <a href= ""><button>Add to My ToodleDo Tasks </button></a>
+        <br>
+        <p></p>
+    {% endfor %}
+{% endblock %}
