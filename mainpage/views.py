@@ -1,11 +1,13 @@
 import requests
 from django.shortcuts import render
+import requests_cache
 #from requests.auth import HTTPBasicAuth
 
 from .forms import SearchForm
 
 from django.http import *
 
+requests_cache.install_cache('project_cache', backend='sqlite', expire_after=86400)
 
 def index(request):
     return HttpResponse("CS411 Project")
@@ -31,6 +33,7 @@ def showprotoresult(request, typetake):
         'Postman-Token': "..."
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
+    print("Used Cache: {0}".format(response.from_cache))
     re_response = response.json()
     return render(request, 'showprotoresult.html', {'response_dict': re_response})
 
