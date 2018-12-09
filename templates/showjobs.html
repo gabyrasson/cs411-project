@@ -3,7 +3,7 @@
     <b>  <strong>Related Jobs</strong></b></br>
     {% for i in response1.data %}
             <b>  <strong>{{ i.fields.title }}</strong></b></br>
-            {% url 'handjob' i.id as the_url %}
+            {% url 'handlejob' i.id as the_url %}
             <a href="{{ the_url }}"><button>Learn more about this job</button></a>
             <br>
             <p></p>

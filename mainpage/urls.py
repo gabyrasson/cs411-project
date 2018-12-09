@@ -7,6 +7,6 @@ urlpatterns = [
     url(r'^showprotoresult/$', views.showprotoresult, name='home'),
     path('showreports/<str:country>/<str:distype>/', views.showreports, name="showreports"),
     path('showjobs/<str:country>/', views.showjobs, name="showjobs"),
-    path('handjob/<str:jobid>/', views.handjob, name="handjob"),
+    path('handlejob/<str:jobid>/', views.handjob, name="handlejob"),
     path('handtraing/<str:traingid>/', views.handtraing, name="handtraing"),
 ]
