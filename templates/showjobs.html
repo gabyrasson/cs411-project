@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <b>  <strong>Related Jobs</strong></b></br>
+    <br>
     {% for i in response1.data %}
             <b>  <strong>{{ i.fields.title }}</strong></b></br>
             {% url 'handlejob' i.id as the_url %}
@@ -8,7 +9,10 @@
             <br>
             <p></p>
     {% endfor %}
+    <br>
+    <br>
     <b>  <strong>Related Trainings</strong></b></br>
+    <br>
     {% for j in response2.data %}
             <b>  <strong>{{ j.fields.title }}</strong></b></br>
             {% url 'handtraing' j.id as the_url %}

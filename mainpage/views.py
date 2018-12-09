@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 import requests
-from requests.auth import HTTPBasicAuth
+from django.shortcuts import render
+#from requests.auth import HTTPBasicAuth
+
 from .forms import SearchForm
 
 from django.http import *
@@ -55,6 +55,22 @@ def showreports(request, country, distype):
     return render(request, 'showreports.html', {'response': re_response})
 
 
+def handlereport(request, reportid):
+    url = "https://api.reliefweb.int/v1/reports/" + str(reportid)
+
+    payload = ""
+    headers = {
+        'cache-control': "no-cache",
+        'Postman-Token': "..."
+    }
+
+    response = requests.request("GET", url, data=payload, headers=headers)
+
+    print(response.text)
+    result = response.json()
+
+    return render(request, 'handlereport.html', {'result': result})
+
 def showjobs(request, country):
     url = "https://api.reliefweb.int/v1/jobs"
 
@@ -63,7 +79,7 @@ def showjobs(request, country):
     payload = ""
     headers = {
         'cache-control': "no-cache",
-        'Postman-Token': ".."
+        'Postman-Token': "..."
     }
 
     response_jobs = requests.request("GET", url, data=payload, headers=headers, params=querystring)
@@ -124,7 +140,7 @@ def handtraing(request, traingid):
     resultjs = result.json()
     return render(request, 'handtraing.html', {'result': resultjs})
 
-
+"""
 def add_task(request):
     request_template = "https://api.toodledo.com/3/account/token.php"
     payload = {'grant_type': 'authorization_code', 'code': '...'}
@@ -132,3 +148,4 @@ def add_task(request):
     r = requests.post(request, params=payload, auth=HTTPBasicAuth('CLIENT_ID', 'CLIENT_SECRET'))
     re = r.json()
     print(re.text)
+"""

@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('mainpage/', include('mainpage.urls')),
     path('showreports/', views.showreports, include('mainpage.urls')),
+    path('handlereport/', views.handlereport, include('mainpage.urls')),
     path('showjobs/', views.showjobs, include('mainpage.urls')),
     path('handlejob/', views.handlejob, include('mainpage.urls')),
     path('handtraing/', views.handtraing, include('mainpage.urls')),

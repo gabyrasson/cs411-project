@@ -6,7 +6,8 @@ urlpatterns = [
     url('^$', views.get_search, name='home'),
     url(r'^showprotoresult/$', views.showprotoresult, name='home'),
     path('showreports/<str:country>/<str:distype>/', views.showreports, name="showreports"),
+    path('handlereport/<str:reportid>/', views.handlereport, name="handlereport"),
     path('showjobs/<str:country>/', views.showjobs, name="showjobs"),
-    path('handlejob/<str:jobid>/', views.handjob, name="handlejob"),
+    path('handlejob/<str:jobid>/', views.handlejob, name="handlejob"),
     path('handtraing/<str:traingid>/', views.handtraing, name="handtraing"),
 ]
