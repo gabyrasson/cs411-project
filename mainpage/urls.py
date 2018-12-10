@@ -10,4 +10,6 @@ urlpatterns = [
     path('showjobs/<str:country>/', views.showjobs, name="showjobs"),
     path('handlejob/<str:jobid>/', views.handlejob, name="handlejob"),
     path('handtraing/<str:traingid>/', views.handtraing, name="handtraing"),
+    path('get_token/', views.get_token, name="get_token"),
+    path('show_tasks', views.show_tasks, name="show_tasks"),
 ]

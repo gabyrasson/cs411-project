@@ -8,9 +8,14 @@
         <b>  Description: </b> <p>{{ i.fields.body}}</p></br>
         <b>  How to Apply: </b> <p>{{ i.fields.how_to_apply}}</p></br>
         <b>  Application Closing Date: </b> <p>{{ i.fields.date.closing}}</p></br>
-        <a href= "https://api.toodledo.com/3/account/authorize.php?response_type=code&client_id=cs411appuser&state=Login&scope=basic%20tasks" target="_blank"><button>View My ToodleDo Tasks</button></a>
-        <a href= ""><button>Add to My ToodleDo Tasks </button></a>
+        <a href= "..." target="_blank"><button>View My ToodleDo Tasks</button></a>
+        {% url 'get_token' as the_url1 %}
+        <a href="{{ the_url1 }}" target="_blank"><button>Get My Toodle Token</button></a>
+        {% url 'show_tasks' as the_url2 %}
+        <a href="{{ the_url2 }}"><button>Show My Toodle Tasks(using complicated OAuth)</button></a>
         <br>
+        <br>
+        <iframe src="http://m.toodledo.com/index.php" align='middle' width="250" height="300"></iframe>
         <p></p>
     {% endfor %}
 {% endblock %}

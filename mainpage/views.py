@@ -1,10 +1,9 @@
 import requests
 from django.shortcuts import render
 import requests_cache
-#from requests.auth import HTTPBasicAuth
-
+from pip._vendor.distlib.compat import raw_input
+from requests.auth import HTTPBasicAuth
 from .forms import SearchForm
-
 from django.http import *
 
 requests_cache.install_cache('project_cache', backend='sqlite', expire_after=86400)
@@ -143,12 +142,39 @@ def handtraing(request, traingid):
     resultjs = result.json()
     return render(request, 'handtraing.html', {'result': resultjs})
 
-"""
-def add_task(request):
-    request_template = "https://api.toodledo.com/3/account/token.php"
-    payload = {'grant_type': 'authorization_code', 'code': '...'}
-    request = request_template.format(**{'code': '...', 'CLIENT_ID': '...', 'CLIENT_SECRET': '...'})
-    r = requests.post(request, params=payload, auth=HTTPBasicAuth('CLIENT_ID', 'CLIENT_SECRET'))
-    re = r.json()
-    print(re.text)
-"""
+
+def get_token(request):
+    client_auth = requests.auth.HTTPBasicAuth('...', '...')
+    post_data = {
+        'grant_type': 'authorization_code',
+        'code': '...',
+        'redirect_uri': 'https://www.toodledo.com/tasks',
+        'state': 'In Development/Beta',
+        'device': 'terminal'
+    }
+
+    response = requests.post('https://api.toodledo.com/3/account/token.php', auth=client_auth, data=post_data)
+    full_token = response.json()
+    return render(request, 'get_token.html', {'token': full_token})
+
+
+def show_tasks(request):
+    url = "http://api.toodledo.com/3/tasks/get.php"
+
+    querystring = {"access_token": "...", "after": "1234567890",
+                   "fields": "folder,star,priority"}
+
+    payload = ""
+    headers = {
+        'cache-control': "no-cache",
+        'Postman-Token': "..."
+    }
+
+    response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+    print(response.text)
+    re = response.json()
+    return render(request, 'showtasks.html', {'result': re})
+
+
+
+

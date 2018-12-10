@@ -26,4 +26,6 @@ urlpatterns = [
     path('showjobs/', views.showjobs, include('mainpage.urls')),
     path('handlejob/', views.handlejob, include('mainpage.urls')),
     path('handtraing/', views.handtraing, include('mainpage.urls')),
+    path('get_token/', views.get_token, include('mainpage.urls')),
+    path('show_tasks/', views.show_tasks, include('mainpage.urls')),
 ]
