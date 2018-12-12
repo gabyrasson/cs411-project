@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+    <br>
+    <br>
     {% for i in response.data %}
             <b>  <strong>{{ i.fields.title }}</strong></b></br>
             {% url 'handlereport' i.id as the_url1 %}

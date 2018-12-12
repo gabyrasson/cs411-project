@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p style="font-size: 150%;">What type of natural disasters do you want to learn about?</p>
-    <form action="." method="post">
+    <br>
+    <p style="font-size: 150%;">What type of natural disaster do you want to learn about?</p>
+    <form name="submitform" action="." method="post">
     {% csrf_token %}
         <b style="font-size: 120%;">{{ form }} </b>
-    <input type="submit" value="Submit" width="48" height="48">
-        <p style="font-size: 100%;"> Types: earthquakes, floods, cyclones, volcanoes</p>
+    <input type="submit" value="Submit" width="48" height="48" />
     </form>
 {% endblock %}
 type="get"
-<input  id="search_box" type="text" name="search_box"  placeholder="Search..." >
+
+<input  id="search_box" type="text" name="search_box"  placeholder="Search..."  >
 <button id="search_submit" type="submit">Submit</button>
+

@@ -8,8 +8,9 @@ from django.http import *
 
 requests_cache.install_cache('project_cache', backend='sqlite', expire_after=86400)
 
+
 def index(request):
-    return HttpResponse("CS411 Project")
+    return render(request, 'index.html')
 
 
 def get_search(request):
@@ -17,7 +18,9 @@ def get_search(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             typins = form.cleaned_data['typein']
+            print(typins=='floods')
             # types: earthquakes, floods, cyclones, volcanoes
+            if (typins != 'earthquakes') and (typins != 'volcanoes') and (typins != 'floods') and (typins != 'cyclones') : return render(request, 'errorpage.html')
             return showprotoresult(request, typins)
     else:
         form = SearchForm()
@@ -72,6 +75,7 @@ def handlereport(request, reportid):
     result = response.json()
 
     return render(request, 'handlereport.html', {'result': result})
+
 
 def showjobs(request, country):
     url = "https://api.reliefweb.int/v1/jobs"
@@ -144,7 +148,7 @@ def handtraing(request, traingid):
 
 
 def get_token(request):
-    client_auth = requests.auth.HTTPBasicAuth('...', '...')
+    client_auth = requests.auth.HTTPBasicAuth('cs411appuser', 'api5c0d288c8dda3')
     post_data = {
         'grant_type': 'authorization_code',
         'code': '...',
@@ -174,7 +178,3 @@ def show_tasks(request):
     print(response.text)
     re = response.json()
     return render(request, 'showtasks.html', {'result': re})
-
-
-
-

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+    <br>
     {% for i in result.data %}
         <b>  Title: <strong>{{ i.fields.title }}</strong></b></br>
         <b>  Country: </b> {{ i.fields.country.0.name}} </br>
