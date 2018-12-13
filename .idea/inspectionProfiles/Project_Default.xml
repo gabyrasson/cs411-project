@@ -17,5 +17,15 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="mainpage.views.title" />
+          <option value="mainpage.views.Job" />
+          <option value="mainpage.views.New" />
+          <option value="mainpage.views.Application" />
+        </list>
+      </option>
+    </inspection_tool>
   </profile>
 </component>

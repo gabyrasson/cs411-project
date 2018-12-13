@@ -9,10 +9,12 @@ from django.http import *
 requests_cache.install_cache('project_cache', backend='sqlite', expire_after=86400)
 
 
+# Main Page
 def index(request):
     return render(request, 'index.html')
 
 
+# Get the search result from users
 def get_search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -20,13 +22,14 @@ def get_search(request):
             typins = form.cleaned_data['typein']
             print(typins=='floods')
             # types: earthquakes, floods, cyclones, volcanoes
-            if (typins != 'earthquakes') and (typins != 'volcanoes') and (typins != 'floods') and (typins != 'cyclones') : return render(request, 'errorpage.html')
+            if (typins != 'earthquakes') and (typins != 'volcanoes') and (typins != 'floods') and (typins != 'cyclones'): return render(request, 'errorpage.html')
             return showprotoresult(request, typins)
     else:
         form = SearchForm()
     return render(request, 'searchbar.html', {'form': form})
 
 
+# Show the crises in Singmera API that the users type in (stored search results in database cache)
 def showprotoresult(request, typetake):
     url = "http://api.sigimera.org/v1/crises"
     querystring = {"auth_token": "...", "type": typetake}
@@ -40,6 +43,7 @@ def showprotoresult(request, typetake):
     return render(request, 'showprotoresult.html', {'response_dict': re_response})
 
 
+# Show the listed reports in ReliefWeb API related to the specific crisis
 def showreports(request, country, distype):
     url = "https://api.reliefweb.int/v1/reports"
 
@@ -60,6 +64,7 @@ def showreports(request, country, distype):
     return render(request, 'showreports.html', {'response': re_response})
 
 
+# Show the specific report from ReliefWeb API
 def handlereport(request, reportid):
     url = "https://api.reliefweb.int/v1/reports/" + str(reportid)
 
@@ -77,6 +82,7 @@ def handlereport(request, reportid):
     return render(request, 'handlereport.html', {'result': result})
 
 
+# Get the related job list on ReliefWeb API
 def showjobs(request, country):
     url = "https://api.reliefweb.int/v1/jobs"
 
@@ -114,6 +120,7 @@ def showjobs(request, country):
     return render(request, 'showjobs.html', {'response1': re_response1, 'response2': re_response2})
 
 
+# Get specific job details
 def handlejob(request, jobid):
     url = "https://api.reliefweb.int/v1/jobs/" + str(jobid)
 
@@ -131,6 +138,7 @@ def handlejob(request, jobid):
     return render(request, 'handlejob.html', {'result': resultjs})
 
 
+# Get specific training details
 def handtraing(request, traingid):
     url = "https://api.reliefweb.int/v1/training/" + str(traingid)
 
@@ -147,8 +155,9 @@ def handtraing(request, traingid):
     return render(request, 'handtraing.html', {'result': resultjs})
 
 
+# Toodle OAuth processing
 def get_token(request):
-    client_auth = requests.auth.HTTPBasicAuth('cs411appuser', 'api5c0d288c8dda3')
+    client_auth = requests.auth.HTTPBasicAuth('...', '...')
     post_data = {
         'grant_type': 'authorization_code',
         'code': '...',
@@ -159,14 +168,20 @@ def get_token(request):
 
     response = requests.post('https://api.toodledo.com/3/account/token.php', auth=client_auth, data=post_data)
     full_token = response.json()
-    return render(request, 'get_token.html', {'token': full_token})
+    kinda_token = full_token["access_token"]
+    if kinda_token is not None:
+        # for test use
+        # return render(request, 'get_token.html', {'token': full_token})
+        return kinda_token
 
 
-def show_tasks(request):
-    url = "http://api.toodledo.com/3/tasks/get.php"
+# Add job/training application to Toodle do-do list using OAuth
+def add_tasks(request, title, duedate):
+    url = "http://api.toodledo.com/3/tasks/add.php"
 
-    querystring = {"access_token": "...", "after": "1234567890",
-                   "fields": "folder,star,priority"}
+    querystring = {"access_token": str(get_token(request)),
+                   "tasks": [{"title": title, "duedate": duedate}],
+                   "fields": "folder,star"}
 
     payload = ""
     headers = {
@@ -174,7 +189,12 @@ def show_tasks(request):
         'Postman-Token': "..."
     }
 
-    response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+    response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
+
     print(response.text)
     re = response.json()
-    return render(request, 'showtasks.html', {'result': re})
+    return render(request, 'addtasks.html', {'result': re})
+
+
+
+

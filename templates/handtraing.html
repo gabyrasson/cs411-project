@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    <br>
     {% for i in result.data %}
         <b>  Title: <strong>{{ i.fields.title }}</strong></b></br>
         <b>  Country: </b> {{ i.fields.country.0.name}} </br>
@@ -9,10 +8,12 @@
         <b>  How to Register: </b> <p>{{ i.fields.how_to_register}}</p></br>
         <b>  Start Date: </b> <p>{{ i.fields.date.start}}</p></br>
         <b>  End Date: </b> <p>{{ i.fields.date.end}}</p></br>
-        <a href= "https://api.toodledo.com/3/account/authorize.php?" target="_blank"><button>View My ToodleDo Tasks</button></a>
+        <a href= "https://api.toodledo.com/3/account/authorize.php?response_type=code&client_id=...&state=Login&scope=basic%20tasks%20write" target="_blank"><button>View My ToodleDo Tasks</button></a>
+        {% url 'add_tasks' i.fields.title  i.fields.date.start as the_url2 %}
+        <a href="{{ the_url2 }}"><button>Add to My Toodle To-do List(OAuth)</button></a>
+        {% url 'get_token' as the_url1 %}
+        <a href="{{ the_url1 }}" target="_blank"><button>Get My Token (Test USE) </button></a>
         <br>
-        <br>
-        <iframe src="http://m.toodledo.com/index.php" align='middle' width="250" height="300"></iframe>
         <p></p>
     {% endfor %}
 {% endblock %}
